@@ -1,3 +1,3 @@
-let ola = 'ola'
+let ola = 'ola';
 
-console.log(ola)
+console.log(ola);
