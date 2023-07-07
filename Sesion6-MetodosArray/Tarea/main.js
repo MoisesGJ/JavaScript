@@ -169,7 +169,7 @@ toUpperCase(countries);
 const getFullName = (people) => {
   const newArray = [];
   for (let i = 0; i < people.length; i++) {
-    newArray.push(people[i].name.first + ' ' + people[i].name.last);
+    newArray.push(`${people[i].name.first} ${people[i].name.last}`);
   }
 
   console.log(newArray);
@@ -187,7 +187,7 @@ const validateNationality = (people, nat) => {
   for (let i = 0; i < people.length; i++) {
     if (nat.toUpperCase() === people[i].nat) {
       validate = true;
-      newArray.push(people[i].name.first + ' ' + people[i].name.last);
+      newArray.push(`${people[i].name.first} ${people[i].name.last}`);
     }
   }
 
