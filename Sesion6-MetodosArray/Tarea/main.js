@@ -143,7 +143,7 @@ getOddNumber(numbers);
 const getCapitalCountrie = (countries) => {
   let finallyString = '';
   for (let i = 0; i < countries.length; i++) {
-    finallyString += countries[i][0];
+    finallyString += countries[i].charAt();
   }
 
   console.log(finallyString);
