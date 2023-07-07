@@ -153,14 +153,10 @@ getCapitalCountrie(countries);
 
 /* 5.- necesito obtener un array que contenga los mismos nombres de cada país, pero escritos en mayúsculas */
 
-// ¿?¿? console.log(countries.toString().toUpperCase().split(','));
-
 const toUpperCase = (countries) => {
   const newArray = [];
-  let aux = '';
   for (let i = 0; i < countries.length; i++) {
-    aux = countries[i];
-    newArray.push(aux.toUpperCase());
+    newArray.push(countries[i].toUpperCase());
   }
 
   console.log(newArray);
@@ -171,14 +167,9 @@ toUpperCase(countries);
 /* 6.- tomando en cuenta el array people, necesito obtener un nuevo array que contenga los nombres completos de cada persona */
 
 const getFullName = (people) => {
-  let newArray = [];
-  let fullName = '';
+  const newArray = [];
   for (let i = 0; i < people.length; i++) {
-    fullName += people[i].name.first;
-    fullName += ' ';
-    fullName += people[i].name.last;
-    newArray.push(fullName);
-    fullName = '';
+    newArray.push(people[i].name.first + ' ' + people[i].name.last);
   }
 
   console.log(newArray);
@@ -205,4 +196,4 @@ const validateNationality = (people, nat) => {
     : console.log('No hay personas con esa nacionalidad');
 };
 
-validateNationality(people, 'mx');
+validateNationality(people, 'ua');
