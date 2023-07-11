@@ -657,7 +657,7 @@ const getHumans = (characters) =>
     []
   );
 /* characters.filter(({ species }) => {
-    return species === 'Human' ? characters.name : null;
+    return species === 'Human';
   }); */
 
 console.log('Personajes humanos:', getHumans(data));
