@@ -1,4 +1,71 @@
-const data = [
+/* 1.- Necesitamos una lista con las diferentes especies que existen en estos personajes */
+
+const getSpecies = (characters) =>
+  characters.reduce(
+    (accum, { species }) =>
+      accum.includes(species) ? accum : [...accum, species],
+    []
+  );
+
+console.log('Especies existentes:', getSpecies(data));
+
+/* 2.- Necesitamos una lista con aquellos personajes que sean Humanos */
+
+const getHumans = (characters) =>
+  characters.reduce(
+    (accum, { species, name }) =>
+      species === 'Human' ? [...accum, name] : accum,
+    []
+  );
+/* characters.filter(({ species }) => {
+    return species === 'Human';
+  }); */
+
+console.log('Personajes humanos:', getHumans(data));
+
+/* 3.- Necesitamos poder obtener la información de un personaje específico con base en su id */
+
+const getCharacterById = (characters, characterid) =>
+  characters.filter(({ id }) => id === characterid);
+
+console.log(`Personaje con ID de 1:`, getCharacterById(data, 1));
+
+/* 4.- Necesitamos una lista de personajes que incluyan en su nombre un string cualquiera 
+    "Ri" => todos los que incluyan "Ri" en su nombre */
+
+const getCharacterByIncludeRi = (characters) =>
+  characters.reduce(
+    (accum, { name }) => (name.includes('Ri') ? [...accum, name] : accum),
+    []
+  );
+
+console.log('Personajes con "Ri" en su nombre:', getCharacterByIncludeRi(data));
+
+/* 5.- Necesito saber la cantidad de personajes cuyo género sea "Male" */
+
+const getCharacterByGenderMale = (characters) =>
+  characters.reduce((accum, { gender }) => {
+    gender === 'Male' && accum++;
+    return accum;
+  }, 0);
+
+console.log(
+  'Cantidad de personajes de género femenino:',
+  getCharacterByGenderMale(data)
+);
+
+/* 6.- Necesito una nueva lista que contenga sólo la información de nombre, tipo y especie de cada personaje */
+
+const getDataBasic = (characters) =>
+  characters.map(({ name, type, species }) => ({
+    name,
+    type: type.length > 0 ? type : null,
+    species,
+  }));
+
+console.log('Personajes según su nombre, tipo y especie:', getDataBasic(data));
+
+var data = [
   {
     id: 1,
     name: 'Rick Sanchez',
@@ -636,70 +703,3 @@ const data = [
     created: '2017-11-04T22:34:53.659Z',
   },
 ];
-
-/* 1.- Necesitamos una lista con las diferentes especies que existen en estos personajes */
-
-const getSpecies = (characters) =>
-  characters.reduce(
-    (accum, { species }) =>
-      accum.includes(species) ? accum : [...accum, species],
-    []
-  );
-
-console.log('Especies existentes:', getSpecies(data));
-
-/* 2.- Necesitamos una lista con aquellos personajes que sean Humanos */
-
-const getHumans = (characters) =>
-  characters.reduce(
-    (accum, { species, name }) =>
-      species === 'Human' ? [...accum, name] : accum,
-    []
-  );
-/* characters.filter(({ species }) => {
-    return species === 'Human';
-  }); */
-
-console.log('Personajes humanos:', getHumans(data));
-
-/* 3.- Necesitamos poder obtener la información de un personaje específico con base en su id */
-
-const getCharacterById = (characters, characterid) =>
-  characters.filter(({ id }) => id === characterid);
-
-console.log(`Personaje con ID de 1:`, getCharacterById(data, 1));
-
-/* 4.- Necesitamos una lista de personajes que incluyan en su nombre un string cualquiera 
-    "Ri" => todos los que incluyan "Ri" en su nombre */
-
-const getCharacterByIncludeRi = (characters) =>
-  characters.reduce(
-    (accum, { name }) => (name.includes('Ri') ? [...accum, name] : accum),
-    []
-  );
-
-console.log('Personajes con "Ri" en su nombre:', getCharacterByIncludeRi(data));
-
-/* 5.- Necesito saber la cantidad de personajes cuyo género sea "Male" */
-
-const getCharacterByGenderMale = (characters) =>
-  characters.reduce((accum, { gender }) => {
-    gender === 'Male' && accum++;
-    return accum;
-  }, 0);
-
-console.log(
-  'Cantidad de personajes de género femenino:',
-  getCharacterByGenderMale(data)
-);
-
-/* 6.- Necesito una nueva lista que contenga sólo la información de nombre, tipo y especie de cada personaje */
-
-const getDataBasic = (characters) =>
-  characters.map(({ name, type, species }) => ({
-    name,
-    type: type.length > 0 ? type : null,
-    species,
-  }));
-
-console.log('Personajes según su nombre, tipo y especie:', getDataBasic(data));
