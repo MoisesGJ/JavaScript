@@ -1,0 +1,22 @@
+* {
+    color: black;
+}
+
+.even {
+    color: rgb(85, 14, 216);
+}
+.odd {
+    color: rgb(70, 176, 31);
+}
+
+#koders-list-average{
+    background-color: #ccc;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.green {
+    color: green;
+}

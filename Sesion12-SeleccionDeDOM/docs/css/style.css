@@ -1,0 +1,12 @@
+/*# sourceMappingURL=style.css.map */
+* {
+    background-color: red;
+}
+
+#lista-dos {
+    background-color: red;
+}
+
+#lista-dos li:not(.active){
+    background-color: brown;
+}
