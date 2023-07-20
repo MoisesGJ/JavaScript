@@ -1,4 +1,4 @@
-const rickyAndMorty = [
+let rickyAndMorty = [
   {
     id: 1,
     name: 'Rick Sanchez',
@@ -637,6 +637,11 @@ const rickyAndMorty = [
   },
 ];
 
+const deleteCards = () => {
+  const rowRickAndMorthy = document.getElementById('cards-RickAndMorthy');
+  rowRickAndMorthy.innerText = '';
+};
+
 const createCardItem = (rickyAndMorthyObject) => {
   let { name, image, episode } = rickyAndMorthyObject;
   let divCol = document.createElement('div');
@@ -660,9 +665,30 @@ const createCardItem = (rickyAndMorthyObject) => {
   description.classList.add('card-text');
   description.innerText = `# ${episode.length}`;
 
-  divCardbody.appendChild(imageCard);
-  divCardbody.appendChild(title);
-  divCardbody.appendChild(description);
+  const drop = `<svg xmlns="http://www.w3.org/2000/svg" name="${name}" width="30" height="30" fill="red" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+  <path name="${name}" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+</svg>`;
+
+  const divdrop = document.createElement('div');
+  divdrop.classList.add('drop-card');
+  divdrop.setAttribute('name', `${name}`);
+  divdrop.innerHTML = drop;
+  divdrop.classList.add('position-absolute', 'top-0', 'end-0', 'd-none');
+
+  divdrop.addEventListener('click', ({ target }) => {
+    const namedelete = target.attributes.name.value;
+
+    deleteCards();
+
+    let newarray = rickyAndMorty.filter((card) => card.name !== namedelete);
+
+    rickyAndMorty = newarray;
+    document.getElementById('pag').classList.toggle('bg-danger');
+
+    printCardRickAndMorthy(rickyAndMorty);
+  });
+
+  divCardbody.append(imageCard, title, description, divdrop);
   divCard.appendChild(divCardbody);
   divCol.appendChild(divCard);
 
@@ -672,6 +698,9 @@ const createCardItem = (rickyAndMorthyObject) => {
 const printCardRickAndMorthy = (ArrayRickAndMorthy) => {
   let rowRickAndMorthy = document.getElementById('cards-RickAndMorthy');
   ArrayRickAndMorthy.forEach((rickAndMorthy) => {
+    rickAndMorthy.name.length > 14 &&
+      (rickAndMorthy.name = `${rickAndMorthy.name.slice(0, 15)}...`);
+
     let elementRickAndMorthy = createCardItem(rickAndMorthy);
     rowRickAndMorthy.appendChild(elementRickAndMorthy);
   });
@@ -679,26 +708,37 @@ const printCardRickAndMorthy = (ArrayRickAndMorthy) => {
 
 printCardRickAndMorthy(rickyAndMorty);
 
-const deleteCards = () => {
-  const rowRickAndMorthy = document.getElementById('cards-RickAndMorthy');
-  rowRickAndMorthy.innerText = '';
-};
-
-const orderByCountEpisodies = (ArrayRickAndMorthy) => {
+const orderByCountEpisodies = (ArrayRickAndMorthy) =>
   ArrayRickAndMorthy.sort((a, b) => a['episode'].length - b['episode'].length);
 
+const unorder = (ArrayRickAndMorthy) =>
+  ArrayRickAndMorthy.sort((a, b) => a['id'] - b['id']);
+
+let order = false;
+
+document.getElementById('btn-order').addEventListener('click', ({ target }) => {
   deleteCards();
 
-  printCardRickAndMorthy(ArrayRickAndMorthy);
-};
+  target.classList.toggle('btn-secondary');
 
-// Para consola => orderByCountEpisodies(rickyAndMorty)
+  if (!order) {
+    rickyAndMorty = orderByCountEpisodies(rickyAndMorty);
+    target.innerText = 'Desordenar';
+  } else {
+    rickyAndMorty = unorder(rickyAndMorty);
+    target.innerText = 'Ordenar';
+  }
+
+  printCardRickAndMorthy(rickyAndMorty);
+  order = !order;
+});
 
 document.getElementById('search').addEventListener('keyup', (event) => {
   const value = event.target.value;
 
   if (value.length === 0) {
     deleteCards();
+    document.getElementById('not-coincidencies').classList.add('d-none');
     printCardRickAndMorthy(rickyAndMorty);
   } else {
     deleteCards();
@@ -706,14 +746,27 @@ document.getElementById('search').addEventListener('keyup', (event) => {
       name.toLowerCase().includes(value.toLowerCase())
     );
 
+    const warn = document.getElementById('not-coincidencies');
+    if (coincidencies.length === 0) {
+      warn.classList.remove('d-none');
+    } else {
+      warn.classList.add('d-none');
+    }
+
     printCardRickAndMorthy(coincidencies);
   }
 });
 
-const newarray = [...rickyAndMorty];
-
 document.getElementById('btn-pop').addEventListener('click', () => {
-  deleteCards();
-  newarray.pop();
-  printCardRickAndMorthy(newarray);
+  const dropelement = document.querySelectorAll('.drop-card');
+  dropelement.forEach((card) => {
+    card.classList.toggle('d-none');
+  });
+
+  const card = document.querySelectorAll('.card');
+  document.getElementById('pag').classList.toggle('bg-danger');
+
+  card.forEach((card) => {
+    card.classList.toggle('bg-danger-subtle');
+  });
 });
