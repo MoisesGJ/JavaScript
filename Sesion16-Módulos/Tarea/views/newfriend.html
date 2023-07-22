@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sé mi amigo</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="bg-dark">
+    <div class="container mt-5 text">
+      <div class="mb-4 text-center">
+        <h1 class="text-bg-dark fw-bold">Mi nuevo amigx:</h1>
+      </div>
+      <form
+        class="text-bg-dark border border rounded p-3 fw-bold"
+        id="form-control-friends"
+      >
+        <div class="mb-3">
+          <label for="fullname" class="form-label">Nombre completo</label>
+          <input type="text" class="form-control" name="fullname" />
+        </div>
+        <div>
+          <label for="age" class="form-label">Edad</label>
+          <input type="text" class="form-control" name="age" />
+        </div>
+        <div class="form-floating mt-5 mb-3">
+          <textarea
+            class="form-control"
+            id="floatingTextarea"
+            name="desc"
+            style="height: 100px"
+          ></textarea>
+          <label for="floatingTextarea">Descripción</label>
+        </div>
+      </form>
+    </div>
+
+    <div class="text-center mt-3">
+      <button
+        class="btn btn-light"
+        style="width: 200px"
+        id="submit-data-friend"
+      >
+        Enviar
+      </button>
+    </div>
+
+    <script src="../js/newfriend.js" type="module"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
